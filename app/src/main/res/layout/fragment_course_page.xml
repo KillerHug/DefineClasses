@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_border"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="1">
+
+        <ImageButton
+            android:id="@+id/backTo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_baseline_backspace" />
+
+        <TextView
+            android:id="@+id/topic_sub_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="More Information"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/course_page_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="fitCenter" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/course_page_banner">
+
+                    <TextView
+                        android:id="@+id/course_page_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="Course Name"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/course_page_fee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center"
+                        android:text="\u20A8 5000"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/course_page_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:drawableStart="@drawable/ic_baseline_calendar"
+                        android:drawablePadding="5dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:text="Duration"
+                        android:textColor="@color/duration_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/buy_course"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/button"
+                        android:text="Buy"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/buy_course"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_design"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/more_info"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.9"
+                            android:background="@android:color/transparent"
+                            android:text="More Information"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
+
+                        <ImageButton
+                            android:id="@+id/more_info_arrow"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_weight="0.1"
+                            android:background="@drawable/ic_arrow_drop_down" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/information_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/moreInfo_course_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Course Name"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/moreInfo_course_duration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:drawableStart="@drawable/ic_baseline_calendar"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/alike"
+                            android:text="Course Duration"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:drawableStart="@drawable/ic_baseline_access_time"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/alike"
+                            android:text="Full Time Access Course"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/moreInfo_course_lecture"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:drawableStart="@drawable/ic_baseline_video"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/alike"
+                            android:text="No. of Lecture"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/moreInfo_course_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/alike"
+                            android:text="Description"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="10dp"
+                                android:text="Your Private Review and Rating"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:id="@+id/personal_review_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="10dp"
+                                android:visibility="gone">
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:background="@drawable/border_design"
+                                    android:orientation="horizontal"
+                                    android:padding="10dp">
+
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/personal_review_image"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:gravity="center_horizontal|center_vertical"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/profile_logo1"
+                                        app:civ_border="true"
+                                        app:civ_border_color="@android:color/black"
+                                        app:civ_border_width="2dp"
+                                        app:civ_shadow="true"
+                                        app:civ_shadow_color="@android:color/black"
+                                        app:civ_shadow_radius="5dp" />
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/personal_review_name"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="5dp"
+                                            android:fontFamily="@font/antic"
+                                            android:text="Name"
+                                            android:textColor="@android:color/black"
+                                            android:textSize="15dp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:id="@+id/personal_review_date"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginTop="5dp"
+                                            android:layout_toRightOf="@id/personal_review_name"
+                                            android:fontFamily="@font/antic"
+                                            android:gravity="right"
+                                            android:text="Post On"
+                                            android:textColor="@android:color/black"
+                                            android:textSize="15dp" />
+                                        <TextView
+                                            android:id="@+id/personal_review_message"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/personal_review_name"
+                                            android:layout_marginTop="5dp"
+                                            android:fontFamily="@font/alike"
+                                            android:lines="2"
+                                            android:maxLines="2"
+                                            android:layout_marginBottom="10dp"
+                                            android:textColor="@android:color/black"
+                                            android:textSize="12sp"
+                                            android:textStyle="bold" />
+
+                                        <RatingBar
+                                            android:id="@+id/personal_RatingView"
+                                            style="?android:attr/ratingBarStyleSmall"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@id/personal_review_message"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_gravity="left|center_horizontal"
+                                            android:layout_marginTop="10dp"
+                                            android:isIndicator="false"
+                                            android:numStars="5"
+                                            android:progressTint="@color/colorOrange"
+                                            android:stepSize="1" />
+                                    </RelativeLayout>
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/edit_personal_review"
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:background="@android:color/transparent"
+                                    android:gravity="center"
+                                    android:text="Edit Review"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/colorOrange"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/review_message"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="10dp"
+                                android:gravity="center_horizontal"
+                                android:textColor="@android:color/holo_green_dark"
+                                android:textSize="14sp"
+                                android:visibility="gone" />
+
+                            <LinearLayout
+                                android:id="@+id/review_submit_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="10dp"
+                                        android:gravity="center"
+                                        android:text="Rate this Course"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <RatingBar
+                                        android:id="@+id/reviewRating"
+                                        style="@style/Widget.AppCompat.RatingBar.Indicator"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="right"
+                                        android:layout_marginLeft="10dp"
+                                        android:isIndicator="false"
+                                        android:numStars="5"
+                                        android:progressBackgroundTint="#B5B1B1"
+                                        android:progressTint="@color/colorOrange"
+                                        android:stepSize="1" />
+                                </LinearLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:focusable="false"
+                                    android:focusableInTouchMode="true"
+                                    android:hint="@string/enter_message"
+                                    app:boxStrokeColor="#000"
+                                    app:boxStrokeWidthFocused="2dp">
+
+                                    <EditText
+                                        android:id="@+id/comment_message"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="20dp"
+                                        android:focusable="true"
+                                        android:gravity="top"
+                                        android:inputType="textMultiLine"
+                                        android:lines="4"
+                                        android:padding="5dp"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="15sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+
+                                <Button
+                                    android:id="@+id/comment_submit"
+                                    android:layout_width="200dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="20dp"
+                                    android:background="@drawable/button"
+                                    android:gravity="center"
+                                    android:padding="10dp"
+                                    android:text="Submit"
+                                    android:textAllCaps="false"
+                                    android:textColor="#fff"
+                                    android:textSize="20sp"
+                                    android:transitionName="next_button" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/see_all_review"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:layout_marginTop="10dp"
+                                android:background="@android:color/transparent"
+                                android:drawableEnd="@drawable/ic_baseline_arrow_forward"
+                                android:gravity="center"
+                                android:text="See All Review"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorOrange"
+                                android:textSize="15sp" />
+
+                            <LinearLayout
+                                android:id="@+id/reviewAddLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorGray" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

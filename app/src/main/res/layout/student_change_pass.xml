@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_border"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:weightSum="1">
+
+                <ImageButton
+                    android:id="@+id/backTo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_baseline_backspace" />
+
+                <TextView
+                    android:id="@+id/topic_sub_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Change Password"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/password_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_baseline_lock_orange" />
+
+                <TextView
+                    android:id="@+id/textInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Change Password"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="20sp"
+                    android:transitionName="text_info" />
+
+                <TextView
+                    android:id="@+id/changePassMSG"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Successfully"
+                    android:textColor="#08804c"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/errorMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="Some Error Occured"
+                    android:textColor="@color/colorRed"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/enter_pass"
+                    app:boxStrokeColor="#000"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/oldPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:drawableStart="@drawable/pass_focus"
+                        android:drawablePadding="10dp"
+                        android:focusable="true"
+                        android:inputType="textPassword"
+                        android:maxLength="20"
+                        android:padding="5dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        app:passwordToggleEnabled="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/enter_pass"
+                    app:boxStrokeColor="#000"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/newPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:drawableStart="@drawable/pass_focus"
+                        android:drawablePadding="10dp"
+                        android:focusable="true"
+                        android:inputType="textPassword"
+                        android:maxLength="20"
+                        android:padding="5dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        app:passwordToggleEnabled="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/enter_pass"
+                    app:boxStrokeColor="#000"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/confirmPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:drawableStart="@drawable/pass_focus"
+                        android:drawablePadding="10dp"
+                        android:focusable="true"
+                        android:inputType="textPassword"
+                        android:maxLength="20"
+                        android:padding="5dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        app:passwordToggleEnabled="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/changePass"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button"
+                    android:padding="10dp"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:transitionName="next_button" />
+
+                <TextView
+                    android:id="@+id/passError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="left"
+                    android:text="Error Password"
+                    android:textColor="@color/colorRed"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

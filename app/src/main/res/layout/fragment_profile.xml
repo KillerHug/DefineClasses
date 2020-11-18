@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_border"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1">
+
+            <ImageButton
+                android:id="@+id/backTo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_baseline_backspace" />
+
+            <TextView
+                android:id="@+id/topic_sub_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Profile"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="4dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/user_logo"
+                            android:layout_width="140dp"
+                            android:layout_height="140dp"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profile_logo1"
+                            app:civ_border="true"
+                            app:civ_border_color="@android:color/black"
+                            app:civ_border_width="2dp"
+                            app:civ_shadow="true"
+                            app:civ_shadow_color="@android:color/black"
+                            app:civ_shadow_radius="5dp" />
+
+                        <Button
+                            android:id="@+id/imageChooser"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_alignRight="@id/user_logo"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/camera" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <Button
+                            android:id="@+id/edit_data"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="right"
+                            android:background="@drawable/edit_icon" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/successMSG"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/msg_frame"
+                            android:padding="10dp"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Successfully"
+                                android:textColor="#08804c"
+                                android:textSize="15sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="MissingConstraints" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="Your Information successsfully updated."
+                                android:textColor="#08804c"
+                                android:textSize="15sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                tools:ignore="MissingConstraints" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/user_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/antic"
+                                android:text="User Name"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/black"
+                                android:textSize="15dp" />
+                            <EditText
+                                android:id="@+id/updateUser_Name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:focusable="false"
+                                android:inputType="text"
+                                android:padding="8dp"
+                                android:enabled="false"
+                                android:background="@android:color/transparent"
+                                android:textColor="@android:color/black"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/antic"
+                                android:text="Name"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@android:color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold"/>
+                            <EditText
+                                android:id="@+id/updateName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:focusable="true"
+                                android:inputType="text"
+                                android:padding="8dp"
+                                android:enabled="false"
+                                android:background="@android:color/transparent"
+                                android:textColor="@android:color/black"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/mobile_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/antic"
+                                android:text="Mobile"
+                                android:textColor="@android:color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold"/>
+                            <EditText
+                                android:id="@+id/updateMobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:focusable="true"
+                                android:inputType="text"
+                                android:padding="8dp"
+                                android:enabled="false"
+                                android:background="@android:color/transparent"
+                                android:textColor="@android:color/black"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/email_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/antic"
+                                android:text="Email Id"
+                                android:textColor="@android:color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold"/>
+                            <EditText
+                                android:id="@+id/updateEmailId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:focusable="true"
+                                android:inputType="text"
+                                android:padding="8dp"
+                                android:enabled="false"
+                                android:background="@android:color/transparent"
+                                android:textColor="@android:color/black"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/antic"
+                                android:text="Address"
+                                android:textColor="@android:color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold"/>
+                            <EditText
+                                android:id="@+id/updateAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:focusable="true"
+                                android:inputType="text"
+                                android:enabled="false"
+                                android:padding="8dp"
+                                android:background="@android:color/transparent"
+                                android:textColor="@android:color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                        <Button
+                            android:id="@+id/updateData_btn"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/button"
+                            android:text="Update"
+                            android:textAllCaps="false"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="20sp" />
+                        <Button
+                            android:id="@+id/change_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:background="@drawable/button_bottom_line"
+                            android:gravity="center_vertical"
+                            android:text="Change Password"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

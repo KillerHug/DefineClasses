@@ -1,0 +1,48 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group >
+        <item android:id="@+id/home"
+            android:title="Home"
+            android:icon="@drawable/ic_dashboard"
+            android:checked="true"
+            android:checkable="true"/>
+        <item android:id="@+id/course"
+            android:title="Course"
+            android:checkable="true"
+            android:icon="@drawable/course"/>
+        <item android:id="@+id/profile"
+            android:title="Profile"
+            android:checkable="true"
+            android:icon="@drawable/ic_baseline_account"/>
+        <item android:id="@+id/mock_test"
+            android:title="Mock Test"
+            android:checkable="true"
+            android:icon="@drawable/mock_test"/>
+        <item android:id="@+id/live_mock_test"
+            android:title="Live Mock Test"
+            android:checkable="true"
+            android:icon="@drawable/mock_test"/>
+        <item android:id="@+id/latest_news"
+            android:title="Latest News"
+            android:checkable="true"
+            android:icon="@drawable/news"
+            />
+        <item android:id="@+id/contact_us"
+            android:title="Contact Us"
+            android:checkable="true"
+            android:icon="@drawable/contact_us"
+            />
+        <item android:id="@+id/register"
+            android:title="Register"
+            android:checkable="true"
+            android:icon="@drawable/register"
+            />
+        <item android:id="@+id/login"
+            android:title="Log In"
+            android:checkable="true"
+            android:icon="@drawable/login"/>
+        <item android:id="@+id/logout"
+            android:title="Logout"
+            android:checkable="true"
+            android:icon="@drawable/ic_logout"/>
+    </group>
+</menu>

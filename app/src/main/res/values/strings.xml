@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Define Classes</string>
+    <string name="search">Search Course</string>
+    <string name="enter_id">Enter User Id or Mobile No.</string>
+    <string name="enter_pass">Enter Password</string>
+    <string name="old_pass">Enter Old Password</string>
+    <string name="new_pass">Enter New Password</string>
+    <string name="confirm_pass">Enter Confirm Password</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_no">Enter Mobile No.</string>
+    <string name="email">Enter Email ID</string>
+    <string name="enter_mobile">Enter Mobile No.</string>
+    <string name="enter_message">Your Message</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

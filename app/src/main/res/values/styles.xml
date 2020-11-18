@@ -1,0 +1,19 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@android:color/black</item>
+        <item name="color">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@android:color/black</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+    <style name="SeekBar" parent="AppTheme">
+        <item name="colorControlActivated">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/colorGray</item>
+    </style>
+</resources>

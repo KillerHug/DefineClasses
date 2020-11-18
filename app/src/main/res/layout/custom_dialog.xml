@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/border_design"
+    android:padding="10dp">
+
+    <!--<ProgressBar
+        android:id="@+id/pdfLoader"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.44" />-->
+    <com.agrawalsuneet.dotsloader.loaders.TashieLoader
+        android:id="@+id/pdfLoader"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tashieloader_animDelay="200"
+        app:tashieloader_animDur="1000"
+        app:tashieloader_dotsColor="@color/colorOrange"
+        app:tashieloader_dotsDist="5dp"
+        app:tashieloader_dotsRadius="10dp"
+        app:tashieloader_interpolator="@android:anim/accelerate_interpolator"
+        app:tashieloader_noOfDots="7" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Loading..."
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:fontFamily="@font/bungee"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pdfLoader" />
+</androidx.constraintlayout.widget.ConstraintLayout>
