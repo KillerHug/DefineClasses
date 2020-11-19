@@ -20,38 +20,35 @@ import com.android.volley.toolbox.ImageLoader;
 import com.bumptech.glide.Glide;
 import com.defineclasses.app.Course_Page;
 import com.defineclasses.app.Model.Course_Model;
+import com.defineclasses.app.Model.MyCourse_Model;
 import com.defineclasses.app.R;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class All_Course_Adapter extends RecyclerView.Adapter<All_Course_Adapter.ViewHolder> implements Filterable {
-    private Course_Model course_model;
-    private List<Course_Model> modelList;
-    private List<Course_Model> modelListFull;
+public class My_Course_Adapter extends RecyclerView.Adapter<My_Course_Adapter.ViewHolder> {
+    private MyCourse_Model course_model;
+    private List<MyCourse_Model> modelList;
     private Context context;
     private ImageLoader imageLoader;
 
-    public All_Course_Adapter(Context context, List<Course_Model> modelList) {
+    public My_Course_Adapter(Context context, List<MyCourse_Model> modelList) {
         this.modelList = modelList;
         this.context = context;
-        modelListFull = new ArrayList<>(modelList);
     }
 
     @NonNull
     @Override
-    public All_Course_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public My_Course_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.custom_all_course, parent, false);
+        View view = inflater.inflate(R.layout.custom_my_course, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull All_Course_Adapter.ViewHolder holder, int position) {
-        final Course_Model model = modelList.get(position);
+    public void onBindViewHolder(@NonNull My_Course_Adapter.ViewHolder holder, int position) {
+        final MyCourse_Model model = modelList.get(position);
         //holder.banner.setBackgroundResource();
-        holder.fee.setText("\u20B9 " + model.getCourse_fee());
         holder.course.setText(model.getCourse());
         holder.duration.setText("Duration: " + model.getDuration() + " Month");
         //holder.description.setText(model.getDescription());
@@ -104,43 +101,10 @@ public class All_Course_Adapter extends RecyclerView.Adapter<All_Course_Adapter.
         public ViewHolder(View view) {
             super(view);
             course_data = view.findViewById(R.id.course_data);//for layout
-            fee = view.findViewById(R.id.course_price);
             course = view.findViewById(R.id.course_name);
             description = view.findViewById(R.id.course_discribe);
             duration = view.findViewById(R.id.course_duration);
             banner = view.findViewById(R.id.banner);
         }
     }
-
-    @Override
-    public Filter getFilter() {
-        return exampleFilter;
-    }
-
-    private Filter exampleFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Course_Model> filterList = new ArrayList<>();
-            if (constraint == null || constraint.length() == 0) {
-                filterList.addAll(modelListFull);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Course_Model item : modelListFull) {
-                    if (item.getCourse().toLowerCase().contains(filterPattern)) {
-                        filterList.add(item);
-                    }
-                }
-            }
-            FilterResults filterResults = new FilterResults();
-            filterResults.values = filterList;
-            return filterResults;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            modelList.clear();
-            modelList.addAll((List)results);
-            notifyDataSetChanged();
-        }
-    };
 }

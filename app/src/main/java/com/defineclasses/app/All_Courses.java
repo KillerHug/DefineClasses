@@ -1,22 +1,24 @@
 package com.defineclasses.app;
 
-import android.app.FragmentTransaction;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +35,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.defineclasses.app.Adapter.All_Course_Adapter;
-import com.defineclasses.app.Adapter.Course_Adapter;
 import com.defineclasses.app.Model.Course_Model;
 import com.google.android.material.navigation.NavigationView;
 
@@ -57,14 +58,16 @@ public class All_Courses extends Fragment {
     int currentItems, totalItems, scrollOutItems, previousTotal;
     LinearLayoutManager manager;
     ProgressBar progressBar;
-    int page=1;
+    int page = 1;
     //Displaying Progressbar
     String url;
+    TextView allCourse;
     int rating;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_course, null);
+        allCourse=view.findViewById(R.id.topic_sub_name);
         recyclerView = view.findViewById(R.id.course_All_RecyclerView);
         manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
@@ -166,6 +169,12 @@ public class All_Courses extends Fragment {
         return view;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
     private void pagination() {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -208,6 +217,7 @@ public class All_Courses extends Fragment {
             }
         });
     }
+
     private void getNext() {
 
         url = "http://defineclasses.com/app/course_file.php?page=" + page;

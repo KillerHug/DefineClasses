@@ -3,6 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/alike</item>
         <item>@font/antic</item>
+        <item>@font/armata</item>
         <item>@font/bungee</item>
     </array>
 </resources>

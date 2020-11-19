@@ -36,29 +36,15 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="All Course"
+                android:text="My Course"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-            <SearchView
-                android:id="@+id/searchView"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:visibility="gone"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center|center_horizontal"
-                android:iconifiedByDefault="false"
-                android:queryHint="Search Here" />
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/course_All_RecyclerView"
+            android:id="@+id/my_course_RecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="10dp"
             android:orientation="vertical" />
-        <ProgressBar
-            android:id="@+id/progressBar1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </ScrollView>

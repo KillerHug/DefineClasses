@@ -101,6 +101,22 @@
                         android:textColor="@color/duration_color"
                         android:textSize="14sp"
                         android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/moreInfo_course_lecture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:drawableStart="@drawable/ic_baseline_calendar"
+                        android:drawablePadding="5dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:layout_toRightOf="@id/course_page_duration"
+                        android:text="No. of Lectures"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/duration_color"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/buy_course"
@@ -110,7 +126,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/button"
-                        android:text="Buy"
+                        android:text="Buy Now"
                         android:textAllCaps="false"
                         android:textColor="@color/colorWhite"
                         android:textSize="12sp" />
@@ -132,25 +148,16 @@
 
                         <Button
                             android:id="@+id/more_info"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_alignParentRight="true"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="0.9"
+                            android:drawableEnd="@drawable/ic_arrow_drop_down"
                             android:background="@android:color/transparent"
-                            android:text="More Information"
+                            android:text="Description"
                             android:textAllCaps="false"
                             android:textColor="@android:color/black"
-                            android:textSize="15sp" />
-
-                        <ImageButton
-                            android:id="@+id/more_info_arrow"
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical|end"
-                            android:layout_weight="0.1"
-                            android:background="@drawable/ic_arrow_drop_down" />
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -159,7 +166,8 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="10dp"
-                        android:visibility="gone">
+                        android:visibility="gone"
+                        >
 
                         <TextView
                             android:id="@+id/moreInfo_course_name"
@@ -171,50 +179,20 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/moreInfo_course_duration"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:drawableStart="@drawable/ic_baseline_calendar"
-                            android:drawablePadding="10dp"
-                            android:fontFamily="@font/alike"
-                            android:text="Course Duration"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:drawableStart="@drawable/ic_baseline_access_time"
-                            android:drawablePadding="10dp"
-                            android:fontFamily="@font/alike"
-                            android:text="Full Time Access Course"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/moreInfo_course_lecture"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:drawableStart="@drawable/ic_baseline_video"
-                            android:drawablePadding="10dp"
-                            android:fontFamily="@font/alike"
-                            android:text="No. of Lecture"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp" />
-
-                        <TextView
                             android:id="@+id/moreInfo_course_description"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginTop="10dp"
                             android:drawablePadding="10dp"
                             android:fontFamily="@font/alike"
-                            android:text="Description"
+                            android:text=""
                             android:textColor="@android:color/black"
                             android:textSize="18sp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@android:color/black"/>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -362,7 +340,6 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
-                                        android:layout_marginLeft="10dp"
                                         android:gravity="center"
                                         android:text="Rate this Course"
                                         android:textColor="@android:color/black"
@@ -424,6 +401,11 @@
                                     android:textSize="20sp"
                                     android:transitionName="next_button" />
                             </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:id="@+id/show_three_review"/>
 
                             <Button
                                 android:id="@+id/see_all_review"

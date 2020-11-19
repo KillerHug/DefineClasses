@@ -9,6 +9,10 @@
             android:title="Course"
             android:checkable="true"
             android:icon="@drawable/course"/>
+        <item android:id="@+id/mycourse"
+            android:title="My Course"
+            android:checkable="true"
+            android:icon="@drawable/course"/>
         <item android:id="@+id/profile"
             android:title="Profile"
             android:checkable="true"

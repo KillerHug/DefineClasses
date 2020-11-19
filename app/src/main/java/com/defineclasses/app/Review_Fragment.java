@@ -57,7 +57,7 @@ public class Review_Fragment extends Fragment {
     EditText reviewName, reviewMessage, reviewEmail;
     Button submitReview;
     TextView txtReviewMessage;
-    LinearLayout addLayout;
+    LinearLayout addLayout,allReviewLayout,noDataLayout;
     TextView txtfull_name, txtemail, txtmessage, txtregistered_date;
     RatingBar txtrating;
     ImageView txtstudent_photo;
@@ -69,6 +69,8 @@ public class Review_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_review, container, false);
         recyclerView = view.findViewById(R.id.rating_recyclerView);
+        allReviewLayout=view.findViewById(R.id.allReviewLayout);
+        noDataLayout=view.findViewById(R.id.noData_Layout);
         manager = new LinearLayoutManager(getContext());
         addLayout = view.findViewById(R.id.reviewAddLayout);
         recyclerView.setLayoutManager(manager);
@@ -116,6 +118,7 @@ public class Review_Fragment extends Fragment {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     if (jsonArray.length() > 0) {
+                        allReviewLayout.setVisibility(View.VISIBLE);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             String review_id = jsonObject1.getString("review_id");
@@ -148,12 +151,20 @@ public class Review_Fragment extends Fragment {
                             reviewCount(rating);
                             averageCount = averageCount + rating;
                         }
+                        txtAverageRating.setText(String.valueOf(averageCount / jsonArray.length()));
+                        averageRating.setRating(averageCount / jsonArray.length());
+                        Log.e("Length", String.valueOf(jsonArray.length()));
                     }
-                    txtAverageRating.setText(String.valueOf(averageCount / jsonArray.length()));
-                    averageRating.setRating(averageCount / jsonArray.length());
-                    Log.e("Length", String.valueOf(jsonArray.length()));
+                    else {
+                        noDataLayout.setVisibility(View.VISIBLE);
+                        allReviewLayout.setVisibility(View.GONE);
+                    }
                 } catch (JSONException error) {
                     Log.e("Error Course json", error.getMessage());
+                }
+                catch (ArithmeticException e)
+                {
+                    Toast.makeText(getContext(), "No Review Found", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

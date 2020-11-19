@@ -42,8 +42,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.defineclasses.app.Adapter.Review_Adapter;
 import com.defineclasses.app.Adapter.Subject_Adapter;
 import com.defineclasses.app.Adapter.Topic_Adapter;
+import com.defineclasses.app.Model.Review_Model;
 import com.defineclasses.app.Model.Subject_Model;
 import com.defineclasses.app.Model.Topic_Model;
 
@@ -60,8 +62,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Course_Page extends Fragment {
     ImageButton back;
-    Button moreInfo;
-    LinearLayout information_layout;
+    Button moreInfo,buyNow;
+    TextView txtfull_name, txtemail, txtmessage, txtregistered_date;
+    RatingBar txtrating;
+    ImageView txtstudent_photo;
+    LinearLayout information_layout,showMinReviewLayout;
     public String course_id, course_name, course_banner, course_duration, course_lectures, course_fee, course_description;
     ImageView banner;
     TextView c_name, c_duration, c_fee;
@@ -74,36 +79,34 @@ public class Course_Page extends Fragment {
     RecyclerView recyclerView;
     String subject, topic_name;
     String topic_type, subject_id, topic_subject_id, topic_course_id;
-    TextView txtCourseName, txtCourseDuration, txtCourseLecture, txtDescription;
+    TextView txtCourseName, txtCourseLecture, txtDescription;
     String topic_id, topic_video;
-    ImageButton downArrow;
     RatingBar personal_Rating, reviewRating;
     CircleImageView personalRatingImage;
-    TextView personalRatingName, personalRatingDate;
+    TextView personalRatingName, personalRatingDate,courseName;
     TextView personalRatingMessage;
     LinearLayout  reviewSubmitLayout, personalReviewLayout;
     Button submitReview, editReview, seeAllReview;
     EditText reviewMessage;
     TextView txtReviewMessage;
     TextView txtMessage;
-    private Object All_Courses;
-
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_course_page, container, false);
         back = view.findViewById(R.id.backTo);
+        buyNow=view.findViewById(R.id.buy_course);
+        showMinReviewLayout=view.findViewById(R.id.show_three_review);
+        courseName=view.findViewById(R.id.topic_sub_name);
         txtMessage = view.findViewById(R.id.review_message);
         seeAllReview = view.findViewById(R.id.see_all_review);
         reviewSubmitLayout = view.findViewById(R.id.review_submit_layout);
         editReview = view.findViewById(R.id.edit_personal_review);
-        downArrow = view.findViewById(R.id.more_info_arrow);
         moreInfo = view.findViewById(R.id.more_info);
         banner = view.findViewById(R.id.course_page_banner);
         c_name = view.findViewById(R.id.course_page_name);
         c_duration = view.findViewById(R.id.course_page_duration);
         c_fee = view.findViewById(R.id.course_page_fee);
-        txtCourseDuration = view.findViewById(R.id.moreInfo_course_duration);
         txtCourseLecture = view.findViewById(R.id.moreInfo_course_lecture);
         txtCourseName = view.findViewById(R.id.moreInfo_course_name);
         txtDescription = view.findViewById(R.id.moreInfo_course_description);
@@ -125,6 +128,54 @@ public class Course_Page extends Fragment {
         course_lectures = getArguments().getString("course_lectures");
         course_fee = getArguments().getString("course_fee");
         course_description = getArguments().getString("course_description");
+        courseName.setText(course_name);
+        buyNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkLogin()) {
+                    Fragment myFragment = new checkOut_Fragment();
+                    Bundle args = new Bundle();
+                    args.putString("checkOut","ConfirmCheckOut");
+                    args.putString("course_name", getArguments().getString("course_name"));
+                    args.putString("course_id", course_id);
+                    args.putString("course_description", getArguments().getString("course_description"));
+                    args.putString("course_banner", getArguments().getString("course_banner"));
+                    args.putString("course_duration", getArguments().getString("course_duration"));
+                    args.putString("course_fee", getArguments().getString("course_fee"));
+                    args.putString("course_lectures", getArguments().getString("course_lectures"));
+                    myFragment.setArguments(args);
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .setCustomAnimations(
+                                    R.anim.enter_right_to_left, R.anim.exit_right_to_left,
+                                    R.anim.enter_left_to_right, R.anim.exit_left_to_right)
+                            .replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+                    getActivity().getFragmentManager().popBackStackImmediate();
+                } else {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                    alertDialog.setTitle("Go to Login Screen");
+                    alertDialog.setMessage("You want to submit your review! Login Please");
+                    alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+                    alertDialog.setPositiveButton("YES",
+                            new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                                    intent.putExtra("checkOut","ConfirmCheckOut");
+                                    startActivity(intent);
+                                    getActivity().overridePendingTransition(R.anim.enter_right_to_left, R.anim.exit_right_to_left);
+                                }
+                            });
+                    alertDialog.setNegativeButton("NO",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    alertDialog.show();
+                }
+            }
+        });
         editReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,7 +213,11 @@ public class Course_Page extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkLogin()) {
-                    submitReviewMethod();
+                    if (checkMessage()){
+                        if(checkRating()) {
+                            submitReviewMethod();
+                        }
+                    }
                 } else {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                     alertDialog.setTitle("Go to Login Screen");
@@ -196,7 +251,6 @@ public class Course_Page extends Fragment {
         if (getArguments() != null) {
             course_id = getArguments().getString("course_id");
             txtCourseName.setText(getArguments().getString("course_name"));
-            txtCourseDuration.setText(getArguments().getString("course_duration"));
             txtCourseLecture.setText(getArguments().getString("course_lectures") + " Lectures");
             txtDescription.setText("Description " + getArguments().getString("course_description"));
         }
@@ -237,12 +291,12 @@ public class Course_Page extends Fragment {
                 if (information_layout.getVisibility() == View.GONE) {
                     information_layout.setVisibility(View.VISIBLE);
                     information_layout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.enter_right_to_left));
-                    downArrow.setBackgroundResource(R.drawable.ic_arrow_drop_up);
+                    moreInfo.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_drop_up, 0);
                 }
                 else {
                     information_layout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.exit_right_to_left));
                     information_layout.setVisibility(View.GONE);
-                    downArrow.setBackgroundResource(R.drawable.ic_arrow_drop_down);
+                    moreInfo.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_drop_down, 0);
                 }
             }
         });
@@ -253,6 +307,7 @@ public class Course_Page extends Fragment {
         subjectList = new ArrayList<>();
         showSubject();
         displayContent();
+        displayReview();
         return view;
     }
     public void checkReview() {
@@ -320,6 +375,7 @@ public class Course_Page extends Fragment {
                 Map<String, String> param = new HashMap<String, String>();
                 param.put("action", "showPersonalReview");
                 param.put("user_name", new SessionManager(getContext()).getUsername());
+                param.put("course_id", getArguments().getString("course_id"));
                 return param;
             }
         };
@@ -523,20 +579,19 @@ public class Course_Page extends Fragment {
     private void blankField() {
         reviewMessage.setText("");
     }
-    @Override
+   /* @Override
     public void onResume() {
-
         super.onResume();
-
-        /*getView().setFocusableInTouchMode(true);
-        getView().requestFocus();*/
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
         getView().setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
-
+                if (event.getAction() == KeyEvent.ACTION_UP || keyCode == KeyEvent.KEYCODE_BACK){
+                    Bundle args = new Bundle();
+                    args.putString("page","page_initialize");
                     Fragment myFragment = new All_Courses();
+                    myFragment.setArguments(args);
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .setCustomAnimations(
@@ -545,15 +600,117 @@ public class Course_Page extends Fragment {
                                     R.anim.enter_right_to_left,
                                     R.anim.exit_right_to_left)
                             .replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
-
                     return true;
-
                 }
-
                 return false;
             }
         });
+    }*/
+
+    public boolean checkMessage() {
+        String checkString = reviewMessage.getText().toString().trim();
+        if (checkString.isEmpty()) {
+            Toast.makeText(getContext(), "Field can not be Empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
+    public boolean checkRating() {
+        int rate = (int) reviewRating.getRating();
+        Log.e("Rate", String.valueOf(rate));
+        if (rate==0) {
+            Toast.makeText(getContext(), "Rate is compulsory selected", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+    public void addCustomLayout() {
 
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.custom_review, null);
+        txtfull_name = view.findViewById(R.id.review_name);
+        txtemail = view.findViewById(R.id.review_email);
+        txtmessage = view.findViewById(R.id.review_message);
+        txtrating = view.findViewById(R.id.showRatingView);
+        txtregistered_date = view.findViewById(R.id.review_date);
+        txtstudent_photo = view.findViewById(R.id.review_image);
+        showMinReviewLayout.addView(view);
+    }
+    void displayReview() {
+        String url = "http://defineclasses.com/app/main_file.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response Full Review", response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    if (jsonArray.length() > 0) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            String review_id = jsonObject1.getString("review_id");
+                            String full_name = jsonObject1.getString("full_name");
+                            String email = jsonObject1.getString("email");
+                            String message = jsonObject1.getString("message");
+                            String student_photo = jsonObject1.getString("student_photo");
+                            String registered_date = jsonObject1.getString("registered_date");
+                            int rating = jsonObject1.getInt("rating");
+                            addCustomLayout();
+                            txtfull_name.setText(full_name);
+                            txtemail.setText(email);
+                            txtmessage.setText(message);
+                            txtregistered_date.setText("Posted Date: " + registered_date);
+                            txtrating.setRating(rating);
+
+                            String photoURL = "https://defineclasses.com/" + student_photo;
+
+                            Glide.with(getContext())
+                                    .asBitmap()
+                                    .placeholder(R.drawable.gradient)
+                                    .error(R.drawable.btn_bg)
+                                    .load(photoURL)
+                                    .into(txtstudent_photo);
+                        }
+                    }
+                } catch (JSONException error) {
+                    Log.e("Error Course json", error.getMessage());
+                }
+                catch (ArithmeticException e)
+                {
+                    Toast.makeText(getContext(), "No Review Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                String message = null;
+
+                if (volleyError instanceof NetworkError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                } else if (volleyError instanceof ServerError) {
+                    message = "The server could not be found. Please try again after some time!!";
+                } else if (volleyError instanceof AuthFailureError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                } else if (volleyError instanceof ParseError) {
+                    message = "Parsing error! Please try again after some time!!";
+                } else if (volleyError instanceof NoConnectionError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                } else if (volleyError instanceof TimeoutError) {
+                    message = "Connection TimeOut! Please check your internet connection.";
+                }
+                Toast.makeText(getContext(), "Message: " + message, Toast.LENGTH_SHORT).show();
+                Log.e("Message", message);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param = new HashMap<>();
+                param.put("action", "showThreeReview");
+                param.put("course_id", getArguments().getString("course_id"));
+                return param;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
+    }
 }

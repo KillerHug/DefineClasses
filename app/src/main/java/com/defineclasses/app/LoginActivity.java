@@ -2,6 +2,7 @@ package com.defineclasses.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -39,21 +40,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    Button btnSignUp, btnMainActivity,forgetBtn,openForget;
-    EditText txtId, txtPass,forgetNumber;
-    TextView msg,forgetMessage;
-    String strUser, strPass,forgetMobile;
+    Button btnSignUp, btnMainActivity, forgetBtn, openForget;
+    EditText txtId, txtPass, forgetNumber;
+    TextView msg, forgetMessage;
+    String strUser, strPass, forgetMobile;
     SessionManager sessionManager;
     User user;
     LinearLayout forgetLayout;
     ConstraintLayout msgLayout;
     ProgressDialog loading;
     Loading_Dialog loading_dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        forgetNumber=(EditText)findViewById(R.id.forgetNumber);
+        forgetNumber = (EditText) findViewById(R.id.forgetNumber);
         btnSignUp = (Button) findViewById(R.id.goto_signup);
         btnMainActivity = (Button) findViewById(R.id.login_data);
         txtId = (EditText) findViewById(R.id.signin_ID);
@@ -61,10 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         msg = (TextView) findViewById(R.id.errorMessage);
         forgetMessage = (TextView) findViewById(R.id.forgetPassMSG);
         msgLayout = (ConstraintLayout) findViewById(R.id.successMSG);
-        forgetBtn=(Button)findViewById(R.id.forget_btn);
-        openForget=(Button)findViewById(R.id.open_forget);
-        forgetLayout=(LinearLayout)findViewById(R.id.forgetSection);
-        loading=new ProgressDialog(LoginActivity.this);
+        forgetBtn = (Button) findViewById(R.id.forget_btn);
+        openForget = (Button) findViewById(R.id.open_forget);
+        forgetLayout = (LinearLayout) findViewById(R.id.forgetSection);
+        loading = new ProgressDialog(LoginActivity.this);
         SharedPreferences sharedPreferences = getSharedPreferences("MSG", MODE_PRIVATE);
         /*String msg = sharedPreferences.getString("pass_success", null);
         if (msg != null) {
@@ -107,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         openForget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                forgetLayout.setVisibility(forgetLayout.getVisibility()==View.GONE?View.VISIBLE:View.GONE);
+                forgetLayout.setVisibility(forgetLayout.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
                 forgetMessage.setVisibility(View.GONE);
             }
         });
@@ -124,33 +126,31 @@ public class LoginActivity extends AppCompatActivity {
 
     private void LoginData() {
 
-        strUser=txtId.getText().toString().trim();
-        strPass=txtPass.getText().toString().trim();
-        loading_dialog=new Loading_Dialog(this);
+        strUser = txtId.getText().toString().trim();
+        strPass = txtPass.getText().toString().trim();
+        loading_dialog = new Loading_Dialog(this);
         loading_dialog.startLoading();
         String url = "http://defineclasses.com/app/main_file.php";
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("Response",response);
+                Log.e("Response", response);
                 try {
-                    String user_name,name,student_id;
-                    JSONObject jsonObject=new JSONObject(response);
-                    String status=jsonObject.getString("success");
-                    if(status.equals("verify"))
-                    {
+                    String user_name, name, student_id;
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("success");
+                    if (status.equals("verify")) {
                         loading_dialog.dismissDialog();
                         user_name = jsonObject.getString("user_name");
                         name = jsonObject.getString("name");
-                        student_id=jsonObject.getString("student_id");
-                        sessionManager=new SessionManager(LoginActivity.this);
-                        user = new User(user_name,name);
+                        student_id = jsonObject.getString("student_id");
+                        sessionManager = new SessionManager(LoginActivity.this);
+                        user = new User(user_name, name);
                         user.setUser_name(user_name);
                         sessionManager.saveSession(user);
                         sessionManager.setLogin(true);
                         moveToFragmentContainer();
-                    }
-                    else if (status.equals("noMatch")) {
+                    } else if (status.equals("noMatch")) {
                         loading_dialog.dismissDialog();
                         Log.e("Message", "Username or Password not matched");
                         msg.setVisibility(View.VISIBLE);
@@ -185,14 +185,14 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Message: " + message, Toast.LENGTH_SHORT).show();
                 Log.e("Message", message);
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> param=new HashMap<>();
-                param.put("action","signin");
-                param.put("user_name",strUser);
-                param.put("password",strPass);
-                return  param;
+                Map<String, String> param = new HashMap<>();
+                param.put("action", "signin");
+                param.put("user_name", strUser);
+                param.put("password", strPass);
+                return param;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -218,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
     private void sendPassword() {
         forgetMobile = forgetNumber.getText().toString().trim();
         String url = "http://defineclasses.com/app/main_file.php";
-        loading_dialog=new Loading_Dialog(this);
+        loading_dialog = new Loading_Dialog(this);
         loading_dialog.startLoading();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -231,9 +231,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (status.equals("verify")) {
                         loading_dialog.dismissDialog();
                         forgetMessage.setVisibility(View.VISIBLE);
-                        mobile= jsonObject.getString("mobile");
+                        mobile = jsonObject.getString("mobile");
                         forgetMessage.setVisibility(View.VISIBLE);
-                        forgetMessage.setText("Your password seccessfully send "+mobile);
+                        forgetMessage.setText("Your password seccessfully send " + mobile);
                         forgetLayout.setVisibility(View.GONE);
                     } else if (status.equals("noMatch")) {
                         loading_dialog.dismissDialog();
@@ -280,14 +280,14 @@ public class LoginActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
     public boolean checkId() {
         String checkString = txtId.getText().toString().trim();
         if (checkString.isEmpty()) {
             Toast.makeText(this, "Field can not be Empty", Toast.LENGTH_SHORT).show();
             txtId.setBackgroundResource(R.drawable.edit_error);
             return false;
-        }
-        else if (checkString.length() > 30) {
+        } else if (checkString.length() > 30) {
             Toast.makeText(this, "Your Username is greater than 30 digit", Toast.LENGTH_SHORT).show();
             txtId.setBackgroundResource(R.drawable.edit_error);
             return false;
@@ -302,8 +302,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Field can not be Empty", Toast.LENGTH_SHORT).show();
             txtPass.setBackgroundResource(R.drawable.edit_error);
             return false;
-        }
-        else if (checkString.length() > 20) {
+        } else if (checkString.length() > 20) {
             Toast.makeText(this, "Your Password is greater than 20 digit", Toast.LENGTH_SHORT).show();
             txtPass.setBackgroundResource(R.drawable.edit_error);
             return false;
@@ -315,10 +314,13 @@ public class LoginActivity extends AppCompatActivity {
         txtId.setText("");
         txtPass.setText("");
     }
+
     private void moveToFragmentContainer() {
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.enter_right_to_left, R.anim.exit_right_to_left);
         finish();
+
     }
 }

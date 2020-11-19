@@ -46,13 +46,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.e("id", String.valueOf(id));
 
         if (id) {
-            navigationView.getMenu().getItem(7).setVisible(false);
-            navigationView.getMenu().getItem(8).setVisible(false);
-            navigationView.getMenu().getItem(9).setVisible(true);
             navigationView.getMenu().getItem(2).setVisible(true);
-        } else {
+            navigationView.getMenu().getItem(3).setVisible(true);
+            navigationView.getMenu().getItem(10).setVisible(true);
+            navigationView.getMenu().getItem(8).setVisible(false);
             navigationView.getMenu().getItem(9).setVisible(false);
+        } else {
             navigationView.getMenu().getItem(2).setVisible(false);
+            navigationView.getMenu().getItem(3).setVisible(false);
+            navigationView.getMenu().getItem(10).setVisible(false);
         }
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new Home_Fragment()).commit();
     }
@@ -82,6 +84,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 R.anim.enter_left_to_right,
                                 R.anim.exit_left_to_right)
                         .replace(R.id.fragment_container, new All_Courses()).addToBackStack(null).commit();
+                break;
+            case R.id.mycourse:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                Log.e("Message", "Change Password");
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.enter_right_to_left,
+                                R.anim.exit_right_to_left,
+                                R.anim.enter_left_to_right,
+                                R.anim.exit_left_to_right)
+                        .replace(R.id.fragment_container, new My_Course()).addToBackStack(null).commit();
                 break;
             case R.id.profile:
                 drawerLayout.closeDrawer(GravityCompat.START);

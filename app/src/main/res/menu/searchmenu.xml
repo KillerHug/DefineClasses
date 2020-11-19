@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/overflow"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_search"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/facebook"
+                android:title="Facebook"/>
+
+            <item
+                android:id="@+id/Twitter"
+                android:title="Twitter"/>
+
+            <item
+                android:id="@+id/Youtube"
+                android:title="Youtube"/>
+        </menu>
+    </item>
+</menu>

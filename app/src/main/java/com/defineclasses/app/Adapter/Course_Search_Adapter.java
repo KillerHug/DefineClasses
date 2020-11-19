@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,46 +19,44 @@ import com.android.volley.toolbox.ImageLoader;
 import com.bumptech.glide.Glide;
 import com.defineclasses.app.Course_Page;
 import com.defineclasses.app.Model.Course_Model;
+import com.defineclasses.app.Model.Course_Search_Model;
 import com.defineclasses.app.R;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class All_Course_Adapter extends RecyclerView.Adapter<All_Course_Adapter.ViewHolder> implements Filterable {
+public class Course_Search_Adapter extends RecyclerView.Adapter<Course_Search_Adapter.ViewHolder> {
     private Course_Model course_model;
-    private List<Course_Model> modelList;
-    private List<Course_Model> modelListFull;
+    private List<Course_Search_Model> modelList;
     private Context context;
     private ImageLoader imageLoader;
 
-    public All_Course_Adapter(Context context, List<Course_Model> modelList) {
+    public Course_Search_Adapter(Context context, List<Course_Search_Model> modelList) {
         this.modelList = modelList;
         this.context = context;
-        modelListFull = new ArrayList<>(modelList);
     }
 
     @NonNull
     @Override
-    public All_Course_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Course_Search_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.custom_all_course, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull All_Course_Adapter.ViewHolder holder, int position) {
-        final Course_Model model = modelList.get(position);
+    public void onBindViewHolder(@NonNull Course_Search_Adapter.ViewHolder holder, int position) {
+        final Course_Search_Model model = modelList.get(position);
         //holder.banner.setBackgroundResource();
         holder.fee.setText("\u20B9 " + model.getCourse_fee());
         holder.course.setText(model.getCourse());
         holder.duration.setText("Duration: " + model.getDuration() + " Month");
         //holder.description.setText(model.getDescription());
         int description_length = model.getDescription().length();
-        if (description_length > 110) {
-            String sub_description = model.getDescription().substring(0, 110);
+        if (description_length > 105) {
+            String sub_description = model.getDescription().substring(0, 105);
             holder.description.setText(sub_description + "...");
         }
+        holder.ratingBar.setRating(model.getRating());
         Glide.with(holder.banner.getContext())
                 .asBitmap()
                 .placeholder(R.drawable.gradient)
@@ -69,6 +66,7 @@ public class All_Course_Adapter extends RecyclerView.Adapter<All_Course_Adapter.
             @Override
             public void onClick(View v) {
                 Bundle args = new Bundle();
+                args.putString("TAG","HomeFragment");
                 args.putString("course_name", model.getCourse());
                 args.putString("course_id", model.getCourse_id());
                 args.putString("course_description", model.getDescription());
@@ -100,6 +98,7 @@ public class All_Course_Adapter extends RecyclerView.Adapter<All_Course_Adapter.
         TextView fee, course, description, duration;
         ImageView banner;
         LinearLayout course_data;
+        RatingBar ratingBar;
 
         public ViewHolder(View view) {
             super(view);
@@ -109,38 +108,7 @@ public class All_Course_Adapter extends RecyclerView.Adapter<All_Course_Adapter.
             description = view.findViewById(R.id.course_discribe);
             duration = view.findViewById(R.id.course_duration);
             banner = view.findViewById(R.id.banner);
+            ratingBar=view.findViewById(R.id.course_rating);
         }
     }
-
-    @Override
-    public Filter getFilter() {
-        return exampleFilter;
-    }
-
-    private Filter exampleFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Course_Model> filterList = new ArrayList<>();
-            if (constraint == null || constraint.length() == 0) {
-                filterList.addAll(modelListFull);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Course_Model item : modelListFull) {
-                    if (item.getCourse().toLowerCase().contains(filterPattern)) {
-                        filterList.add(item);
-                    }
-                }
-            }
-            FilterResults filterResults = new FilterResults();
-            filterResults.values = filterList;
-            return filterResults;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            modelList.clear();
-            modelList.addAll((List)results);
-            notifyDataSetChanged();
-        }
-    };
 }
